@@ -13,7 +13,8 @@ namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLa
         public UpdateProgramminLanguageCommandValidator()
 
         {
-            RuleFor(pl => pl.Name).NotEmpty();
+            RuleFor(pl => pl.Id).NotEmpty();
+            RuleFor(pl => pl.Name).NotEmpty();          
         }
 
     }

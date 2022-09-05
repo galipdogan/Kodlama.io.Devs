@@ -35,5 +35,12 @@ namespace Application.Features.ProgrammingLanguages.Rules
         {
             if (programmingLanguage == null) throw new BusinessException("Requested programming language does not exists.");
         }
+
+        public async Task WillBeCheckedBeforeDeleting(int id)
+        {
+            var entity = await _programmingLanguageRepository.GetAsync(x => x.Id == id);
+            if (entity == null)
+                throw new BusinessException("Silinecek kayit bulunamadi");
+        }
     }
 }

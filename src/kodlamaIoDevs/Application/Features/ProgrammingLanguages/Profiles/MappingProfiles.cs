@@ -18,10 +18,10 @@ namespace Application.Features.Brands.Profiles
     {
         public MappingProfiles()
         {
+            CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap();
+
             CreateMap<ProgrammingLanguage, CreatedProgrammingLanguageDto>().ReverseMap();
             CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommand>().ReverseMap();
-
-            CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap();
 
             CreateMap<ProgrammingLanguage, ProgrammingLanguageListDto>().ReverseMap();
             CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();

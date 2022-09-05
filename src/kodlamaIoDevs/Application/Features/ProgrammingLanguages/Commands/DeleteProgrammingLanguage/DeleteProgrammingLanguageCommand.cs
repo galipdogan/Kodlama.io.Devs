@@ -32,7 +32,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLa
             public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand dpl, CancellationToken cancellationToken)
             {
 
-                //  await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Id);
+                await _programmingLanguageBusinessRules.WillBeCheckedBeforeDeleting(dpl.Id);
 
                 ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(dpl);
                 ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappedProgrammingLanguage);
