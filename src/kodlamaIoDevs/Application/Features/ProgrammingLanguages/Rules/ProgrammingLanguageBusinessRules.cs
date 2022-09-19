@@ -40,7 +40,7 @@ namespace Application.Features.ProgrammingLanguages.Rules
         {
             var entity = await _programmingLanguageRepository.GetAsync(x => x.Id == id);
             if (entity == null)
-                throw new BusinessException("Silinecek kayit bulunamadi");
+                throw new BusinessException("Deleted record was not found");
         }
     }
 }

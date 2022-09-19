@@ -1,10 +1,7 @@
 ﻿using Application.Features.ProgrammingLanguages.Dtos;
-using Application.Features.ProgrammingLanguages.Models;
-using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
-using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -23,27 +20,27 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLa
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
-            private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusiness;
+            private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
             public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
-                _programmingLanguageBusiness = programmingLanguageBusinessRules;
+                _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
 
             }
 
             public async Task<ProgrammingLanguageGetByIdDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken)
             {
                 ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(b => b.Id == request.Id);
-                _programmingLanguageBusiness.ProgrammingLanguageNameShouldExistWhenRequested(programmingLanguage);
+                _programmingLanguageBusinessRules.ProgrammingLanguageNameShouldExistWhenRequested(programmingLanguage);
                 ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(programmingLanguage);
                 return programmingLanguageGetByIdDto;
             }
         }
 
     }
-    
+
 }
 
 

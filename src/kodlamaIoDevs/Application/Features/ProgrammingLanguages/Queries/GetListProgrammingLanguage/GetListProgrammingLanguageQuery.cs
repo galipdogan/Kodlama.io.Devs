@@ -1,4 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguages;
+﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Models;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -32,8 +32,8 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLa
             public async Task<ProgrammingLanguageListModel> Handle(GetListProgrammingLanguageQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<ProgrammingLanguage> programmingLanguages = await _programmingLanguageRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
-                ProgrammingLanguageListModel mappedBrandListModel = _mapper.Map<ProgrammingLanguageListModel>(programmingLanguages);
-                return mappedBrandListModel;
+                ProgrammingLanguageListModel mappedProgrammingLanguageListModel = _mapper.Map<ProgrammingLanguageListModel>(programmingLanguages);
+                return mappedProgrammingLanguageListModel;
             }
         }
     }

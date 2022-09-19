@@ -29,12 +29,12 @@ namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLa
                 _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
             }
 
-            public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand dpl, CancellationToken cancellationToken)
+            public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
 
-                await _programmingLanguageBusinessRules.WillBeCheckedBeforeDeleting(dpl.Id);
+                await _programmingLanguageBusinessRules.WillBeCheckedBeforeDeleting(request.Id);
 
-                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(dpl);
+                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappedProgrammingLanguage);
                 DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
 

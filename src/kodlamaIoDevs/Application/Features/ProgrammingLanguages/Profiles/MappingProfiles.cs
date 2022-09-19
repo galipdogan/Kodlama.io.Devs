@@ -1,4 +1,5 @@
-﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguages;
+﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand;
 using Application.Features.ProgrammingLanguages.Dtos;
 using Application.Features.ProgrammingLanguages.Models;
 using AutoMapper;
@@ -9,10 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand;
-using static Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage.UpdateProgramminLanguageCommand;
+using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 
-namespace Application.Features.Brands.Profiles
+namespace Application.Features.ProgrammingLanguages.Profiles
 {
     public class MappingProfiles : Profile
     {

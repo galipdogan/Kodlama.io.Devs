@@ -8,8 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
-    <Folder Include="Features\ProgrammingLanguages\Queries\DeleteProgrammingLanguage\" />
-    <Folder Include="Features\ProgrammingLanguages\Queries\UpdateProgrammingLanguage\" />
+    <Folder Include="Features\SocialMedias\Constants\" />
+    <Folder Include="Features\SocialMedias\Profiles\" />
+    <Folder Include="Features\Technologies\Constants\" />
   </ItemGroup>
 
   <ItemGroup>
