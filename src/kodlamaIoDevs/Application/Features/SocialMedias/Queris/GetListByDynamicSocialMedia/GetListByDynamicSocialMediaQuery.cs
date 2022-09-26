@@ -35,7 +35,7 @@ namespace Application.Features.SocialMedias.Queris.GetListByDynamicSocialMedia
             {
                 IPaginate<SocialMedia> technologies = await
                     _socialMediaRepository.GetListByDynamicAsync(request.Dynamic,
-                    include: c => c.Include(c => c.UserProfile),
+                    include: c => c.Include(c => c.User),
                     index: request.PageRequest.Page,
                     size: request.PageRequest.PageSize);
                 //Businessrules...

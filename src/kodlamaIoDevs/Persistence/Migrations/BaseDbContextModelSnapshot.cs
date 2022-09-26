@@ -124,7 +124,9 @@ namespace Persistence.Migrations
                         .HasColumnName("PasswordSalt");
 
                     b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
+                        .HasDefaultValue(true)
                         .HasColumnName("Status");
 
                     b.HasKey("Id");
@@ -174,7 +176,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProgrammingLanguage", (string)null);
+                    b.ToTable("ProgrammingLanguages", (string)null);
 
                     b.HasData(
                         new
@@ -232,9 +234,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ProgrammingLanguageId");
 
-                    b.Property<int>("id")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProgrammingLanguageId");
@@ -246,22 +245,13 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             Name = "WPF",
-                            ProgrammingLanguageId = 1,
-                            id = 0
+                            ProgrammingLanguageId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Name = "ASP.NET",
-                            ProgrammingLanguageId = 1,
-                            id = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Vue",
-                            ProgrammingLanguageId = 2,
-                            id = 0
+                            Name = "Spring",
+                            ProgrammingLanguageId = 1
                         });
                 });
 
@@ -297,13 +287,13 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.SocialMedia", b =>
                 {
-                    b.HasOne("Core.Security.Entities.User", "UserProfile")
+                    b.HasOne("Core.Security.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserProfile");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Technology", b =>

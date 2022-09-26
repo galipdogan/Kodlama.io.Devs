@@ -13,7 +13,7 @@ namespace Domain.Entities
         public int UserId { get; set; }
         public string Link { get; set; }
 
-        public User? UserProfile { get; set; }
+        public virtual User? User { get; set; }
 
         public SocialMedia()
         {

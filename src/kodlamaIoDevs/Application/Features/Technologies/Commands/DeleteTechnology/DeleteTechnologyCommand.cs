@@ -34,8 +34,9 @@ namespace Application.Features.Technologies.Commands.DeleteTechnology
             {
                 await _technologyBusinessRules.WillBeCheckedBeforeDeleting(request.Id);
 
-                Technology technology=_mapper.Map<Technology>(request);  
-                Technology deletedTecnology=await _technologyRepository.DeleteAsync(technology);
+                Technology? technologyToDelete = await _technologyRepository.GetAsync(t => t.Id == request.Id);
+                //Technology technology=_mapper.Map<Technology>(request);  
+                Technology deletedTecnology=await _technologyRepository.DeleteAsync(technologyToDelete);
                 DeletedTechnologyDto  deletedTechnologyDto  = _mapper.Map<DeletedTechnologyDto>(deletedTecnology);
 
                 return deletedTechnologyDto;

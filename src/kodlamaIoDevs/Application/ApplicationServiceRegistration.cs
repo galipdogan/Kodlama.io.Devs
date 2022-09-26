@@ -1,11 +1,14 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
+﻿using Application.Features.Auth.Rules;
+using Application.Features.ProgrammingLanguages.Rules;
 using Application.Features.SocialMedias.Rules;
 using Application.Features.Technologies.Rules;
-using Application.Features.Users.Rules;
+using Application.Services.Auth;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -24,10 +27,13 @@ namespace Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<UserBusinessRules>();
             services.AddScoped<ProgrammingLanguageBusinessRules>();
             services.AddScoped<TechnologyBusinessRules>();
             services.AddScoped<SocialMediaBusinessRules>();
+
+            services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<IAuthService, AuthManager>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
