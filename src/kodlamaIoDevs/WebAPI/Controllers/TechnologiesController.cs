@@ -46,6 +46,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid/{Id}")]
         public async Task<IActionResult> GetByIdTechnology([FromRoute] GetByIdTechnologyQuery getByIdTechnologyQuery)
         {
+
             TechnologyGetByIdDto technologyGetByIdDto = await Mediator.Send(getByIdTechnologyQuery);
             return Ok(technologyGetByIdDto);
         }

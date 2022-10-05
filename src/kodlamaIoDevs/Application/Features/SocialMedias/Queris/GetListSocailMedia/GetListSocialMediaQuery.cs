@@ -6,6 +6,7 @@ using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,11 @@ namespace Application.Features.SocialMedias.Queris.GetListSocailMedia
 
             public async Task<SocialMediaListModel> Handle(GetListSocialMediaQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<SocialMedia> socialMedia = await _socialMediaRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+                IPaginate<SocialMedia> socialMedia = await _socialMediaRepository.GetListAsync(include:
+                                                                                               s => s.Include(u => u.User),
+                                                                                               index:request.PageRequest.Page, 
+                                                                                               size: request.PageRequest.PageSize); 
+
                 SocialMediaListModel mappedSocialMediaListModel = _mapper.Map<SocialMediaListModel>(socialMedia);
                 return mappedSocialMediaListModel;
             }

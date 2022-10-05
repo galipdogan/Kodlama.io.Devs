@@ -11,11 +11,11 @@ namespace Application.Features.Auth.Commands.AuthRegister
     {
         public RegisterAuthCommandValidator()
         {
-            RuleFor(r => r.Email).NotEmpty();
-            RuleFor(r => r.Email).EmailAddress();
-            RuleFor(r => r.Password).NotEmpty();
-            RuleFor(r => r.FirstName).NotEmpty();
-            RuleFor(r => r.LastName).NotEmpty();
+            RuleFor(r => r.UserForRegisterDto.Email).NotEmpty();
+            RuleFor(r => r.UserForRegisterDto.Email).EmailAddress();
+            RuleFor(r => r.UserForRegisterDto.Password).NotEmpty();
+            RuleFor(r => r.UserForRegisterDto.FirstName).NotEmpty();
+            RuleFor(r => r.UserForRegisterDto.LastName).NotEmpty();
         }
     }
 }

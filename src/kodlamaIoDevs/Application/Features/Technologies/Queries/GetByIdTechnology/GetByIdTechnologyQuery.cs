@@ -35,6 +35,7 @@ namespace Application.Features.Technologies.Queries.GetByIdTechnology
             {
                 Technology? technology = await _technologyRepository.GetAsync(b => b.Id == request.Id);
                 _technologyBusiness.TechnologyNameShouldExistWhenRequested(technology);
+               
                 TechnologyGetByIdDto technologyGetByIdDto = _mapper.Map<TechnologyGetByIdDto>(technology);
                 return technologyGetByIdDto;
             }

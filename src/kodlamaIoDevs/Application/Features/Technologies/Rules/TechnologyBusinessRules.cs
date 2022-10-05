@@ -23,6 +23,10 @@ namespace Application.Features.Technologies.Rules
         {
             IPaginate<Technology> technology = await _technologyRepository.GetListAsync(pl => pl.Name == name);
             if (technology.Items.Any()) throw new BusinessException("Technology name exists.");
+
+        } public async Task TechnologyNameCanNotExist(int id)
+        {
+            if (id == null) throw new BusinessException("Requested programming Technology does not exists.");
         }
 
         public async Task TechnologyNameCanNotBeDuplicatedWhenUpdated(string name)

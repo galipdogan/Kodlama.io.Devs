@@ -1,5 +1,8 @@
 ﻿using Application.Features.Auth.Commands.AuthLogin;
 using Application.Features.Auth.Commands.AuthRegister;
+using Application.Features.Auths.Dtos;
+using Core.Security.Dtos;
+using Core.Security.Entities;
 using Core.Security.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +16,28 @@ namespace WebAPI.Controllers
     {
        
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterAuthCommand registerAuthCommand)
+        public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
-            AccessToken register = await Mediator.Send(registerAuthCommand);
-            return Created("", register);
+            RegisterAuthCommand registerCommand = new()
+            {
+                UserForRegisterDto = userForRegisterDto,
+                IpAddress = GetIpAddress()
+            };
+
+            RegisteredDto result = await Mediator.Send(registerCommand);
+            SetRefreshTokenCookie(result.RefreshToken);
+            return Created("", result.AccessToken);
+        }
+
+        private void SetRefreshTokenCookie(RefreshToken refreshToken)
+        {
+            CookieOptions cookieOptions = new()
+            {
+                HttpOnly = true,
+                Expires = DateTime.Now.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
+
         }
 
         [HttpPost("Login")]

@@ -1,7 +1,10 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Features.Auths.Dtos;
+using Application.Services.Auth;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Persistence.Paging;
+using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
@@ -15,53 +18,57 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Auth.Commands.AuthRegister
 {
-    public class RegisterAuthCommand : IRequest<AccessToken>
+    public class RegisterAuthCommand : IRequest<RegisteredDto>
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public UserForRegisterDto UserForRegisterDto { get; set; }
 
-        public class RegisterAuthCommandHandler : IRequestHandler<RegisterAuthCommand, AccessToken>
+        public string IpAddress { get; set; }
+  
+
+        public class RegisterAuthCommandHandler : IRequestHandler<RegisterAuthCommand, RegisteredDto>
         {
-            private readonly IUserRepository _userRepository;
-            private readonly IUserOperationClaimRepository _userOperationClaimRepository;
-            private readonly IMapper _mapper;
-            private readonly ITokenHelper _tokenHelper;
             private readonly AuthBusinessRules _authBusinessRules;
+            private readonly IUserRepository _userRepository;
+            private readonly IAuthService _authService;
 
-            public RegisterAuthCommandHandler(IUserRepository userRepository, IMapper mapper, ITokenHelper tokenHelper, AuthBusinessRules authBusinessRules, IUserOperationClaimRepository userOperationClaimRepository)
+            public RegisterAuthCommandHandler(AuthBusinessRules authBusinessRules, IUserRepository userRepository, IAuthService authService)
             {
-                _userRepository = userRepository;
-                _mapper = mapper;
-                _tokenHelper = tokenHelper;
                 _authBusinessRules = authBusinessRules;
-                _userOperationClaimRepository = userOperationClaimRepository;
+                _userRepository = userRepository;
+                _authService = authService;
             }
 
-            public async Task<AccessToken> Handle(RegisterAuthCommand request, CancellationToken cancellationToken)
+            public async Task<RegisteredDto> Handle(RegisterAuthCommand request, CancellationToken cancellationToken)
             {
-                await _authBusinessRules.AuthRegisterNameCanNotBeDuplicatedWhenInserted(request.Email);
+                await _authBusinessRules.EmailCannotBeDuplicatedWhenRegistered(request.UserForRegisterDto.Email);
 
-                Byte[] passwordHash, passwordSalt;
-                HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
+                byte[] passwordHash;
+                byte[] passwordSalt;
+                HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out passwordHash, out passwordSalt);
 
-                User user = _mapper.Map<User>(request);
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-                user.Status = true;
+                User newUser = new()
+                {
+                    Email = request.UserForRegisterDto.Email,
+                    PasswordHash = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    FirstName = request.UserForRegisterDto.FirstName,
+                    LastName = request.UserForRegisterDto.LastName,
+                    Status = true
+                };
 
-                User userRegister = await _userRepository.AddAsync(user);
+                User createdUser = await _userRepository.AddAsync(newUser);
+                AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
+                RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
+                RefreshToken addRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
-                //Default Role User
-                UserOperationClaim userOperationClaim = new() { UserId = userRegister.Id, OperationClaimId = 2 };
-                await _userOperationClaimRepository.AddAsync(userOperationClaim);
 
-                IPaginate<UserOperationClaim> userGetClaims = await _userOperationClaimRepository.GetListAsync(u => u.UserId == userRegister.Id,
-                    include: i => i.Include(i => i.OperationClaim));
+                RegisteredDto registeredDto = new()
+                {
+                    RefreshToken = addRefreshToken,
+                    AccessToken = createdAccessToken
+                };
+                return registeredDto;
 
-                AccessToken accessToken = _tokenHelper.CreateToken(user, userGetClaims.Items.Select(u => u.OperationClaim).ToList());
-                return accessToken;
             }
         }
     }

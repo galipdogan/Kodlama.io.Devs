@@ -10,21 +10,25 @@ namespace Domain.Entities
 {
     public class SocialMedia:Entity
     {
-        public int UserId { get; set; }
-        public string Link { get; set; }
-
-        public virtual User? User { get; set; }
-
         public SocialMedia()
         {
 
         }
 
-        public SocialMedia(int id, int userId, string link) : this()
+        public SocialMedia(int id, int userId, string link, string firstName, string lastName) : this()
         {
             Id = id;
             UserId = userId;
             Link = link;
         }
+
+        public int UserId { get; set; }
+        public string Link { get; set; }
+
+        public virtual User? User { get; set; }
+
+       
+
+        
     }
 }

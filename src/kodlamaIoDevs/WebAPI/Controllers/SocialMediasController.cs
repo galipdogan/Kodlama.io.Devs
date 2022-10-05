@@ -25,11 +25,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getlist")]
-        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        public async Task<ActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
-            GetListSocialMediaQuery result = new() { PageRequest = pageRequest };
-            SocialMediaListModel request = await Mediator.Send(result);
-            return Ok(request);
+            GetListSocialMediaQuery getListSocialMediaQuery = new GetListSocialMediaQuery { PageRequest = pageRequest };
+            SocialMediaListModel socialMediaListModel = await Mediator.Send(getListSocialMediaQuery);
+            return Ok(socialMediaListModel);
         }
 
         [HttpPost("getList/byDynamic")]

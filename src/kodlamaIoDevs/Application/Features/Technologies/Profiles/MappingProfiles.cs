@@ -26,6 +26,7 @@ namespace Application.Features.Technologies.Profiles
 
             CreateMap<Technology, TechnologyListDto>()
                 .ForMember(t=>t.ProgrammingLanguageName,opt=>opt.MapFrom(t=>t.ProgrammingLanguage.Name)).ReverseMap();
+
             CreateMap<Technology, TechnologyGetByIdDto>()
                 .ForMember(t => t.ProgrammingLanguageName, opt => opt.MapFrom(t => t.ProgrammingLanguage.Name)).ReverseMap();
 

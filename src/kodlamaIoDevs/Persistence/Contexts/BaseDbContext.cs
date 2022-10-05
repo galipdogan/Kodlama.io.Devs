@@ -19,9 +19,9 @@ namespace Persistence.Contexts
         public DbSet<SocialMedia> SocialMedias { get; set; }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
-
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
@@ -80,6 +80,7 @@ namespace Persistence.Contexts
                 p.Property(p => p.AuthenticatorType).HasColumnName("AuthenticatorType");
                 p.HasMany(p => p.UserOperationClaims);
                 p.HasMany(p => p.RefreshTokens);
+               
             });
 
            

@@ -19,6 +19,12 @@ namespace Application.Features.Auth.Rules
             _userRepository = userRepository;
         }
 
+        public async Task EmailCannotBeDuplicatedWhenRegistered(string email)
+        {
+            User? user = await _userRepository.GetAsync(u => u.Email == email);
+            if (user != null) throw new BusinessException("Mail Already Exist");
+        }
+
         public async Task AuthRegisterNameCanNotBeDuplicatedWhenInserted(string email)
         {
             IPaginate<User> result = await _userRepository.GetListAsync(u => u.Email == email);
