@@ -17,8 +17,6 @@ public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>,IS
     {
         private IOperationClaimRepository _operationClaimRepository;
         private IMapper _mapper;
-        
-
 
         public CreateOperationClaimCommandHandler(IOperationClaimRepository operationClaimRepository, IMapper mapper)
         {
@@ -27,15 +25,12 @@ public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>,IS
         }
 
 
-        public async Task<CreatedOperationClaimDto> Handle(CreateOperationClaimCommand request,
-            CancellationToken cancellationToken)
+        public async Task<CreatedOperationClaimDto> Handle(CreateOperationClaimCommand request, CancellationToken cancellationToken)
         {
             OperationClaim operationClaim = _mapper.Map<OperationClaim>(request);
-            OperationClaim createdOperationClaim =
-                await _operationClaimRepository.AddAsync(operationClaim);
-            CreatedOperationClaimDto createdOperationDto =
-                _mapper.Map<CreatedOperationClaimDto>(createdOperationClaim);
-            return createdOperationDto;
+            OperationClaim createdOperationClaim = await _operationClaimRepository.AddAsync(operationClaim);
+            CreatedOperationClaimDto createdOperationClaimDto = _mapper.Map<CreatedOperationClaimDto>(createdOperationClaim);
+            return createdOperationClaimDto;
         }
     }
 }

@@ -18,6 +18,10 @@ namespace Application.Features.OperationClaims.Commands.DeleteOperationClaimComm
     {
         public int Id { get; set; }
         public string[] Roles => new[] { "admin", "user" };
+        
+    public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimDto>
+    {
+        public int Id { get; set; }
 
         public class DeleteOperationClaimCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedOperationClaimDto>
         {

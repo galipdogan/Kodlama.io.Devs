@@ -13,19 +13,24 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand
 {
-<<<<<<< Updated upstream
     public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
     {
         public int Id { get; set; }
 
         public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
-=======
+
     public class DeleteOperationClaimCommand : IRequest<DeletedProgrammingLanguageDto>,ISecuredRequest
     {
         public int Id { get; set; }
         public string[] Roles => new[] { "admin"};
         public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedProgrammingLanguageDto>
->>>>>>> Stashed changes
+
+    public class DeleteOperationClaimCommand : IRequest<DeletedProgrammingLanguageDto>
+    {
+        public int Id { get; set; }
+
+        public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedProgrammingLanguageDto>
+
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
@@ -38,7 +43,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLa
                 _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
             }
 
-            public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
+            public async Task<DeletedProgrammingLanguageDto> Handle(DeleteOperationClaimCommand request, CancellationToken cancellationToken)
             {
                 ProgrammingLanguage? programmingLanguageToDelete = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.Id);
 

@@ -19,6 +19,11 @@ namespace Application.Features.OperationClaims.Commands.UpdateOperationClaim
         public string Name { get; set; }
         public string[] Roles => new[] { "admin", "user" };
 
+    internal class UpdateOperationClaimCommand : IRequest<UpdatedOperationClaimDto>
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
         public class UpdateOperationClaimCommandHandler : IRequestHandler<UpdateOperationClaimCommand, UpdatedOperationClaimDto>
         {
             private readonly IOperationClaimRepository _operationClaimRepository;

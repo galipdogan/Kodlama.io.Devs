@@ -9,13 +9,9 @@ namespace Application.Features.UserOperationClaims.Commands.CreateUserOperationC
 public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimDto>
 {
     public int UserId { get; set; }
-<<<<<<< Updated upstream
     public int OperationId { get; set; }
-    
-=======
     public int OperationClaimId { get; set; }
     public string[] Roles => new[] { "admin" };
->>>>>>> Stashed changes
     public class CreateUserOperationClaimCommandHandler : IRequestHandler<CreateUserOperationClaimCommand,
         CreatedUserOperationClaimDto>
     {
