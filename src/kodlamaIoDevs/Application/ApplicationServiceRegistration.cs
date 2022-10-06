@@ -5,6 +5,7 @@ using Application.Features.Technologies.Rules;
 using Application.Services.Auth;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
+using Core.Security.JWT;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Application
 {
@@ -31,12 +33,18 @@ namespace Application
             services.AddScoped<TechnologyBusinessRules>();
             services.AddScoped<SocialMediaBusinessRules>();
 
+
+            //services.AddScoped<OperationClaimBusinessRules>();
+            //services.AddScoped<UserOperationClaimBusinessRules>();
+
+
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<IAuthService, AuthManager>();
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ITokenHelper, JwtHelper>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

@@ -2,6 +2,7 @@
 using Application.Features.SocialMedias.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -12,12 +13,13 @@ using System.Threading.Tasks;
 
 namespace Application.Features.SocialMedias.Commands.CreateSocialMedia
 {
-    public class CreateSocialMediaCommand : IRequest<CreatedSocialMediaDto>
+    public class CreateSocialMediaCommand : IRequest<CreatedSocialMediaDto>,ISecuredRequest
     {
         public int UserId { get; set; }
         public string Link { get; set; }
         public string Name { get; set; }
 
+        public string[] Roles => new[] { "admin", "user" };
         public class CreateSocialMediaCommandHandler : IRequestHandler<CreateSocialMediaCommand, CreatedSocialMediaDto>
         {
             private readonly ISocialMediaRepository _socialMediaRepository;

@@ -2,6 +2,7 @@
 using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -12,11 +13,19 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand
 {
+<<<<<<< Updated upstream
     public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
     {
         public int Id { get; set; }
 
         public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
+=======
+    public class DeleteOperationClaimCommand : IRequest<DeletedProgrammingLanguageDto>,ISecuredRequest
+    {
+        public int Id { get; set; }
+        public string[] Roles => new[] { "admin"};
+        public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedProgrammingLanguageDto>
+>>>>>>> Stashed changes
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;

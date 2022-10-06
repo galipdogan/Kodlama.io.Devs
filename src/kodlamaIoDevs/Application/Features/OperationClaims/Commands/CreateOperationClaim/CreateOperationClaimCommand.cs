@@ -3,16 +3,17 @@ using Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim
 using Application.Features.UserOperationClaims.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
 
 namespace Application.Features.OperationClaims.Commands.CreateOperationClaim;
 
-public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>
+public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>,ISecuredRequest
 {
     public string Name { get; set; }
-    public class CreateOperationClaimCommandHandler : IRequestHandler<CreateOperationClaimCommand,
-        CreatedOperationClaimDto>
+
+    public class CreateOperationClaimCommandHandler : IRequestHandler<CreateOperationClaimCommand, CreatedOperationClaimDto>
     {
         private IOperationClaimRepository _operationClaimRepository;
         private IMapper _mapper;
