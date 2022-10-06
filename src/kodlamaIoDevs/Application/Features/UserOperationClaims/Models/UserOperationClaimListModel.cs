@@ -7,5 +7,5 @@ namespace Application.Features.UserOperationClaims.Models;
 
 public class UserOperationClaimListModel:BasePageableModel
 {
-    public IList<OperationClaim> Items { get; set; }
+    public IList<UserOperationClaimsListDto> Items { get; set; }
 }

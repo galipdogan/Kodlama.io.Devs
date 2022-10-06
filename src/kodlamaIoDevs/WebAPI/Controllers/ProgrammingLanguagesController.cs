@@ -1,7 +1,9 @@
 ﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand;
+using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Dtos;
 using Application.Features.ProgrammingLanguages.Models;
+using Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -28,27 +30,27 @@ namespace WebAPI.Controllers
             return Ok(request);
         }
 
-        //[HttpGet("getbyid/{Id}")]
-        //public async Task<IActionResult> GetByIdProgrammingLanguage([FromRoute] GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
-        //{
-        //    ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = await Mediator.Send(getByIdProgrammingLanguageQuery);
-        //    return Ok(programmingLanguageGetByIdDto);
-        //}
+        [HttpGet("getbyid/{Id}")]
+        public async Task<IActionResult> GetByIdProgrammingLanguage([FromRoute] GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
+        {
+            GetByIdDtoProgrammingLanguage programmingLanguageGetByIdDto = await Mediator.Send(getByIdProgrammingLanguageQuery);
+            return Ok(programmingLanguageGetByIdDto);
+        }
 
         [HttpDelete("delete/{Id}")]
-        public async Task<IActionResult> DeleteProgrammingLanguage([FromBody] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
+        public async Task<IActionResult> DeleteProgrammingLanguage([FromBody] DeleteOperationClaimCommand deleteProgrammingLanguageCommand)
         {
             //GetListProgrammingLanguageQuery result = new() { PageRequest = pageRequest };
             DeletedProgrammingLanguageDto deletedProgrammingLanguage = await Mediator.Send(deleteProgrammingLanguageCommand);
             return Ok(deletedProgrammingLanguage);
         }
 
-        //[HttpPut("update/{Id}")]
-        //public async Task<IActionResult> UpdateProgrammingLanguage([FromBody] UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
-        //{
-        //    //GetListProgrammingLanguageQuery result = new() { PageRequest = pageRequest };
-        //    UpdatedProgrammingLanguageDto? updatedProgrammingLanguage = await Mediator.Send(updateProgrammingLanguageCommand);
-        //    return Ok(updatedProgrammingLanguage);
-        //}
+        [HttpPut("update/{Id}")]
+        public async Task<IActionResult> UpdateProgrammingLanguage([FromBody] UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
+        {
+            //GetListProgrammingLanguageQuery result = new() { PageRequest = pageRequest };
+            UpdatedProgrammingLanguageDto? updatedProgrammingLanguage = await Mediator.Send(updateProgrammingLanguageCommand);
+            return Ok(updatedProgrammingLanguage);
+        }
     }
 }

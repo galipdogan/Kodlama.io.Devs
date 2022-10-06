@@ -19,11 +19,13 @@ public class MappingProfiles : Profile
 
         // CreateMap<UserOperationClaim, UpdatedUserOperationClaimDto>().ReverseMap();
         // CreateMap<UserOperationClaim, UpdateUserOperationClaimCommand>().ReverseMap();
-        //
-        // CreateMap<UserOperationClaim, DeletedUserOperationClaimDto>().ReverseMap();
-        // CreateMap<UserOperationClaim, DeleteUserOperationClaimCommand>().ReverseMap();
+        
+        //CreateMap<UserOperationClaim, DeletedUserOperationClaimDto>().ReverseMap();
+        //CreateMap<UserOperationClaim, DeleteUserOperationClaimCommand>().ReverseMap();
 
-        CreateMap<UserOperationClaim, UserOperationClaimListDto>().ReverseMap();
+        CreateMap<UserOperationClaim, UserOperationClaimsListDto>().ReverseMap();
+        CreateMap<UserOperationClaim, UserOperationClaimsGetByUserIdDto>().ReverseMap();
+
         CreateMap<IPaginate<UserOperationClaim>, UserOperationClaimListModel>().ReverseMap();
         
     }
