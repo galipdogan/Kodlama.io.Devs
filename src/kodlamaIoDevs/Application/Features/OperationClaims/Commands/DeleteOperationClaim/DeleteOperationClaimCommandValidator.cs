@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KodlamaIODevs.Application.Features.ProgrammingLanguages.Commands.Delete
 {
-    public class DeleteProgrammingLanguageValidator : AbstractValidator<DeleteOperationClaimCommand>
+    public class DeleteOperationClaimValidator : AbstractValidator<DeleteOperationClaimCommand>
     {
-        public DeleteProgrammingLanguageValidator()
+        public DeleteOperationClaimValidator()
         {
             RuleFor(c => c.Id).NotEmpty();
         }

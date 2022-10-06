@@ -33,10 +33,9 @@ namespace Application.Features.Technologies.Queries.GetListTechnology
             public async Task<TechnologyListModel> Handle(GetListTechnologyQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<Technology> technologies = await _technologyRepository.GetListAsync(include:
-                    t=>t.Include(pl=>pl.ProgrammingLanguage),
-                    index: request.PageRequest.Page,
-                    size: request.PageRequest.PageSize
-                    );
+                                                                                              t => t.Include(pl => pl.ProgrammingLanguage),
+                                                                                              index: request.PageRequest.Page,
+                                                                                              size: request.PageRequest.PageSize);
                 TechnologyListModel mappedTechnologyListModel = _mapper.Map<TechnologyListModel>(technologies);
                 return mappedTechnologyListModel;
             }
