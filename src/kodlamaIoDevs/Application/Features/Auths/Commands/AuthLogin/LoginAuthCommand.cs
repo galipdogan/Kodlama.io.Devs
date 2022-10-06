@@ -1,5 +1,6 @@
 ﻿using Application.Features.Auth.Rules;
 using Application.Services.Repositories;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using Core.Security.Entities;

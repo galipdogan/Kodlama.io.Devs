@@ -1,28 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\ProgrammingLanguages\Constants\" />
-    <Folder Include="Features\SocialMedias\Constants\" />
-    <Folder Include="Features\Technologies\Constants\" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Features\SocialPlatforms\**" />
+	  <Compile Remove="Features\Technology\**" />
+	  <EmbeddedResource Remove="Features\SocialPlatforms\**" />
+	  <EmbeddedResource Remove="Features\Technology\**" />
+	  <None Remove="Features\SocialPlatforms\**" />
+	  <None Remove="Features\Technology\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
-	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
-	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Features\ProgrammingLanguages\Constants\" />
+		<Folder Include="Features\SocialMedias\Constants\" />
+		<Folder Include="Features\Technologies\Constants\" />
+		<Folder Include="Features\OperationClaims\Rules" />
+		<Folder Include="Features\UserOperationClaims\Rules" />
+		<Folder Include="Features\Users\Commands" />
+		<Folder Include="Features\Users\Constanst" />
+		<Folder Include="Features\Users\Rules" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\corePackages\Core.Application\Core.Application.csproj" />
-    <ProjectReference Include="..\..\corePackages\Core.CrossCuttingConcers\Core.CrossCuttingConcerns.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\corePackages\Core.Application\Core.Application.csproj" />
+		<ProjectReference Include="..\..\corePackages\Core.CrossCuttingConcers\Core.CrossCuttingConcerns.csproj" />
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+	</ItemGroup>
 
 </Project>

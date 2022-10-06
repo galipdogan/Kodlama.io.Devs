@@ -3,6 +3,7 @@ using Application.Features.Technologies.Dtos;
 using Application.Features.Technologies.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -14,9 +15,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Technologies.Commands.DeleteTechnology
 {
-    public class DeleteTechnologyCommand : IRequest<DeletedTechnologyDto>
+    public class DeleteTechnologyCommand : IRequest<DeletedTechnologyDto>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] Roles => new[] { "admin" };
         public class DeleteTechnologyCommandHandler:IRequestHandler<DeleteTechnologyCommand, DeletedTechnologyDto>
         {
             private readonly ITechnologyRepository _technologyRepository;
