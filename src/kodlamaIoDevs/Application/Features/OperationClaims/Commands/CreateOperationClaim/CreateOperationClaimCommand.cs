@@ -12,6 +12,7 @@ namespace Application.Features.OperationClaims.Commands.CreateOperationClaim;
 public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>,ISecuredRequest
 {
     public string Name { get; set; }
+    public string[] Roles => new[] { "admin" };
 
     public class CreateOperationClaimCommandHandler : IRequestHandler<CreateOperationClaimCommand, CreatedOperationClaimDto>
     {

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Technologies.Commands.CreateTechnology
 {
-    public class CreateTechnologyCommand : IRequest<CreatedTechnologyDto>, ISecuredRequest
+    public class CreateTechnologyCommand : IRequest<CreatedTechnologyDto>,ISecuredRequest
     {
         public int ProgrammingLanguageId { get; set; }
         public string Name { get; set; }

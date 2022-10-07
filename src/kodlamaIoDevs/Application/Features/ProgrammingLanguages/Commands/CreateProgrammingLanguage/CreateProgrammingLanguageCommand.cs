@@ -3,7 +3,6 @@ using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
-using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +18,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLa
     {
        public string Name { get; set; }
 
-       public string[] Roles => new[] { "admin", "user" };
+        public string[] Roles => new[] {"admin","user" }; 
 
         public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
         {

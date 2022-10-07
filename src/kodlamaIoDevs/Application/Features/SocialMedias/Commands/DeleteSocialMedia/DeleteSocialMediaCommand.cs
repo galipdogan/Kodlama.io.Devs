@@ -16,13 +16,13 @@ namespace Application.Features.SocialMedias.Commands.DeleteSocialMedia
     public class DeleteSocialMediaCommand : IRequest<DeletedSocialMediaDto>,ISecuredRequest
     {
         public int Id { get; set; }
-        public string[] Roles => new[] { "admin" };
-        public class DeleteSocialMediaCommandHandler : IRequestHandler<DeleteSocialMediaCommand, DeletedSocialMediaDto>
+
+        public class DeleteSocialMediaCommandHandler : IRequestHandler<DeleteSocialMediaCommand, DeletedSocialMediaDto>,ISecuredRequest
         {
             private readonly ISocialMediaRepository _socialMediaRepository;
             private readonly IMapper _mapper;
             private readonly SocialMediaBusinessRules _socialMediaBusinessRules;
-
+            public string[] Roles => new[] { "admin" };
             public DeleteSocialMediaCommandHandler(ISocialMediaRepository socialMediaRepository, IMapper mapper, SocialMediaBusinessRules socialMediaBusinessRules)
             {
                 _socialMediaRepository = socialMediaRepository;

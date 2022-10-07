@@ -13,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage
 {
-    public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>,ISecuredRequest
+    public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>, ISecuredRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string[] Roles => new[] { "admin" };
-
+        public string[] Roles => new[] { "admin", "user" };
         public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, UpdatedProgrammingLanguageDto>
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;

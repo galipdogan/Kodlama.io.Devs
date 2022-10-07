@@ -17,7 +17,7 @@ namespace Application.Features.OperationClaims.Commands.DeleteOperationClaimComm
     public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimDto>,ISecuredRequest
     {
         public int Id { get; set; }
-        public string[] Roles => new[] { "admin", "user" };
+        public string[] Roles => new[] { "admin"};
 
         public class DeleteOperationClaimCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedOperationClaimDto>
         {

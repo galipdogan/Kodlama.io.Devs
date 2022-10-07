@@ -19,7 +19,7 @@ namespace Application.Features.SocialMedias.Commands.UpdateSocialMedia
         public int Id { get; set; }
         public string Link { get; set; }
         public int UserId  { get; set; }
-        public string[] Roles => new[] { "admin" };
+        public string[] Roles => new[] { "admin", "user" };
 
         public class UpdateSocialMediaCommandHandler:IRequestHandler<UpdateSocialMediaCommand, UpdatedSocialMediaDto>
         {

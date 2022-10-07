@@ -6,25 +6,18 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="Features\SocialPlatforms\**" />
-	  <Compile Remove="Features\Technology\**" />
-	  <EmbeddedResource Remove="Features\SocialPlatforms\**" />
-	  <EmbeddedResource Remove="Features\Technology\**" />
-	  <None Remove="Features\SocialPlatforms\**" />
-	  <None Remove="Features\Technology\**" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Features\ProgrammingLanguages\Constants\**" />
+    <Compile Remove="Features\SocialMedias\Constants\**" />
+    <EmbeddedResource Remove="Features\ProgrammingLanguages\Constants\**" />
+    <EmbeddedResource Remove="Features\SocialMedias\Constants\**" />
+    <None Remove="Features\ProgrammingLanguages\Constants\**" />
+    <None Remove="Features\SocialMedias\Constants\**" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Features\ProgrammingLanguages\Constants\" />
-		<Folder Include="Features\SocialMedias\Constants\" />
-		<Folder Include="Features\Technologies\Constants\" />
-		<Folder Include="Features\OperationClaims\Rules" />
-		<Folder Include="Features\UserOperationClaims\Rules" />
-		<Folder Include="Features\Users\Commands" />
-		<Folder Include="Features\Users\Constanst" />
-		<Folder Include="Features\Users\Rules" />
-	</ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Technologies\Constants\" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />

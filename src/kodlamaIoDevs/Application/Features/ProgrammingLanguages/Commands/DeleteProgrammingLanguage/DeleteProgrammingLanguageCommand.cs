@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguageCommand
 {
-<<<<<<< Updated upstream
-    public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
+    public class DeleteOperationClaimCommand : IRequest<DeletedProgrammingLanguageDto>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] Roles => new[] { "admin" };
 
         public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
 =======
